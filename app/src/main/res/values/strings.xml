@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">MpdamProject2021</string>
+    <string name="pourcentage">0 %</string>
+    <string name="logo">Logo</string>
+    <string name="Email">Email</string>
+    <string name="username">Nom d\'utilisateur</string>
+    <string name="nomComplet">Nom complet</string>
+    <string name="MotDePasse">Mot de passe</string>
+    <string name="ComfirmationMDP">Confirmation Mot de passe</string>
+    <string name="NumTel">Numéro de téléphone</string>
+    <string name="Inscri">Inscription</string>
+    <string name="telephone">téléphone</string>
+    <string name="MdpOublié">Mot de passe oublié ?</string>
+    <string name="pas_de_compte">Vous n\'avez pas de compte ?</string>
+    <string name="inscription">Inscription</string>
+    <string name="inscrire">S\'inscrire</string>
+    <string name="se_connecter">se connecter</string>
+    <string name="compteExistant">Avez-vous un compte ?</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tv_mode">Mode</string>
+    <string name="tv_parfums_maquillages"><![CDATA[Parfums & Maquillages]]></string>
+
+</resources>

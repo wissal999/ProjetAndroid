@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:icon="@drawable/ic_baseline_home_24"
+        android:id="@+id/item_home"
+        android:title="Acceuil"
+        android:enabled="true"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
+        android:icon="@drawable/ic_baseline_shopping_cart_24"
+        android:id="@+id/item_cart"
+        android:enabled="true"
+        android:title="Panier"
+        app:showAsAction="ifRoom"
+        />
+    <item
+        android:icon="@drawable/ic_baseline_qr_code_scanner_24"
+        android:id="@+id/item_scan"
+        android:title="Scanner"
+        android:enabled="true"
+        app:showAsAction="ifRoom"
+    />
+    <item
+        android:icon="@drawable/ic_baseline_person_24"
+        android:id="@+id/item_person"
+        android:title="Compte"
+        android:enabled="true"
+        app:showAsAction="ifRoom"
+        />
+</menu>
