@@ -14,13 +14,21 @@ import android.widget.Toast;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import retrofit.Call;
+import retrofit.Callback;
+import retrofit.Response;
+import retrofit.Retrofit;
+
 public class ScanActivity extends AppCompatActivity {
-    ImageView imageScan;
+    ImageView imageScan,imageBack;
+    String price;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan);
+
         imageScan=findViewById(R.id.img_scan);
+        imageBack=findViewById(R.id.image_back);
         imageScan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -28,6 +36,13 @@ public class ScanActivity extends AppCompatActivity {
 
             }
         });
+        imageBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
     }
     public void scanCode(){
         IntentIntegrator integrator=new IntentIntegrator(this);
@@ -45,21 +60,42 @@ public class ScanActivity extends AppCompatActivity {
         if (result != null) {
             if (result.getContents() !=null){
                 AlertDialog.Builder builder=new AlertDialog.Builder(this);
-                builder.setMessage(result.getContents());
-                builder.setTitle("Scannig result");
-                builder.setNegativeButton("Scan again", new DialogInterface.OnClickListener() {
+                ApiHandler apiHandler= ApiClient.getApiClient().create(ApiHandler.class);
+                Call<Product> scanProduct=apiHandler.scanProduct(result.getContents());
+                scanProduct.enqueue(new Callback<Product>() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        scanCode();
+                    public void onResponse(Response<Product> response, Retrofit retrofit) {
+                        if (response.body().getSuccess().equals("1") ) {
+                            builder.setMessage(response.body().getPriceProduct()+" DT");
+                            builder.setTitle("Prix de produit");
+                            builder.setPositiveButton("Scan again", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    scanCode();
+                                }
+                            }).setNegativeButton("finish", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.cancel();
+                                }
+                            });
+                            AlertDialog dialog=builder.create();
+                            dialog.show();
+
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(), "No data found  ", Toast.LENGTH_LONG).show();
+
+
+                        }
                     }
-                }).setNegativeButton("finish", new DialogInterface.OnClickListener() {
+
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        finish();
+                    public void onFailure(Throwable t) {
+
                     }
                 });
-                AlertDialog dialog=builder.create();
-                dialog.show();
+
             }
             else {
                 Toast.makeText(this,"no resultats",Toast.LENGTH_LONG).show();
@@ -71,4 +107,5 @@ public class ScanActivity extends AppCompatActivity {
 
 
     }
+
 }

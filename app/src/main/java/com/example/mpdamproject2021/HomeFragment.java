@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DefaultItemAnimator;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,12 +19,17 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import retrofit.Call;
+import retrofit.Callback;
+import retrofit.Response;
+import retrofit.Retrofit;
+
 import static androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL;
 
 public class HomeFragment extends Fragment {
 
-    private RecyclerView recyclerView,recyclerViewBanner,recyclerView1;
-    LinearLayoutManager layoutManager1,layoutManager2;
+    private RecyclerView recyclerViewMode,recyclerViewMaquillage,recyclerViewBebe,recyclerViewSuperette,recyclerViewBanner;
+    LinearLayoutManager layoutManagerBanner;
     RecyclerView.LayoutManager  layoutManager;
 
     Timer timer;
@@ -40,35 +45,28 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v=inflater.inflate(R.layout.fragment_home, container, false);
-        List<Produit> listeProduit= new ArrayList<>();
-        listeProduit.add(new Produit(1,"Nutella",R.drawable.nutella));
-        listeProduit.add(new Produit(2,"Ferrero",R.drawable.ferrero));
-        listeProduit.add(new Produit(3,"Fromage",R.drawable.frommage));
+
+
 
         List<String> listeUrls= new ArrayList<>();
         listeUrls.add("https://previews.123rf.com/images/starlena/starlena1711/starlena171100054/90042033-affiche-publicitaire-pour-produit-cosm%C3%A9tique-pour-catalogue-magazine-conception-de-vecteur-de-paquet.jpg");
         listeUrls.add("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.crushpixel.com%2Ffr%2Fstock-vector%2Fcosmetic-background-product-promo-advertising-269515.html&psig=AOvVaw3Fjz97dtct5olMrOjy2BR4&ust=1639346589430000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCIjT_4_g3PQCFQAAAAAdAAAAABAN");
         listeUrls.add("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.crushpixel.com%2Ffr%2Fstock-vector%2Fcosmetic-background-product-promo-advertising-269515.html&psig=AOvVaw3Fjz97dtct5olMrOjy2BR4&ust=1639346589430000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCIjT_4_g3PQCFQAAAAAdAAAAABAN");
 
-        recyclerView=v.findViewById(R.id.recycler_liste);
+        recyclerViewMode=v.findViewById(R.id.recyclerview_mode);
+        recyclerViewMaquillage=v.findViewById(R.id.recyclerview_maquillage);
+        recyclerViewBebe=v.findViewById(R.id.recyclerview_bebe);
+        recyclerViewSuperette=v.findViewById(R.id.recyclerview_superette);
+
         recyclerViewBanner=v.findViewById(R.id.recycler_banner);
-        recyclerView1=v.findViewById(R.id.recycler_listeMaquillage);
+        layoutManagerBanner=new LinearLayoutManager(getActivity(), HORIZONTAL,false);
+        recyclerViewBanner.setLayoutManager(layoutManagerBanner);
+        fetchProduct(recyclerViewMode,"mode");
+        fetchProduct(recyclerViewMaquillage,"maquillage");
+        fetchProduct(recyclerViewBebe,"bebe");
+        fetchProduct(recyclerViewSuperette,"superette");
 
-        layoutManager=new LinearLayoutManager(getActivity(), HORIZONTAL,false);
-        layoutManager1=new LinearLayoutManager(getActivity(), HORIZONTAL,false);
-        layoutManager2=new LinearLayoutManager(getActivity(), HORIZONTAL,false);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView1.setLayoutManager(layoutManager2);
-        recyclerViewBanner.setLayoutManager(layoutManager1);
 
-        RecyclerViewAdapter produitAdapter=new RecyclerViewAdapter(getActivity(), listeProduit);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(produitAdapter);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-        recyclerView1.setHasFixedSize(true);
-        recyclerView1.setAdapter(produitAdapter);
-        recyclerView1.setItemAnimator(new DefaultItemAnimator());
 
 
         BannerAdapter bannerAdapter=new BannerAdapter(getActivity(), listeUrls);
@@ -92,7 +90,7 @@ public class HomeFragment extends Fragment {
                 if (newState == 1) {
                     stopAutoScrollBanner();
                 } else if (newState == 0) {
-                    position = layoutManager1.findFirstCompletelyVisibleItemPosition();
+                    position = layoutManagerBanner.findFirstCompletelyVisibleItemPosition();
                     runAutoScrollBanner();
                 }
             }
@@ -121,7 +119,7 @@ public class HomeFragment extends Fragment {
             timer.cancel();
             timer = null;
             timerTask = null;
-            position = layoutManager1.findFirstCompletelyVisibleItemPosition();
+            position = layoutManagerBanner.findFirstCompletelyVisibleItemPosition();
         }
     }
     private void runAutoScrollBanner(){
@@ -143,5 +141,28 @@ public class HomeFragment extends Fragment {
             };
             timer.schedule(timerTask,4000,4000);
         }
+    }
+    public void fetchProduct(RecyclerView recyclerView,String category){
+        ApiHandler apiHandler= ApiClient.getApiClient().create(ApiHandler.class);
+        Call<List<Product>> getProduct=apiHandler.getProducts(category);
+        getProduct.enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Response<List<Product>> response, Retrofit retrofit) {
+                List<Product> listProduct;
+                if (response.isSuccess()) {
+                    listProduct = response.body();
+                    layoutManager=new LinearLayoutManager(getActivity(), HORIZONTAL,false);
+                    recyclerView.setLayoutManager(layoutManager);
+                    ProductAdapter ProductAdapter = new ProductAdapter(getActivity(),listProduct);
+                    recyclerView.setAdapter( ProductAdapter);
+
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+
+            }
+        });
     }
 }

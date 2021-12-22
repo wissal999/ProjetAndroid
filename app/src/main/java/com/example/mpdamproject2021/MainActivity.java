@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
 
-            String URL="http://192.168.193.58:80/";
+            String URL="http://192.168.21.58:80/";
             Bundle bundle=new Bundle();
             bundle.putString("url",URL);
             unFragment.setArguments(bundle);
