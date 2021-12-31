@@ -15,7 +15,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MpdamProject2021">
-        <activity android:name=".DetailsActivity"></activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false" />
+        <activity android:name=".DetailsActivity" />
         <activity android:name=".ScanActivity" />
         <activity android:name=".SplashScreenActivity">
             <intent-filter>

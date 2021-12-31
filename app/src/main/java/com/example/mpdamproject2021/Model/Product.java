@@ -1,4 +1,4 @@
-package com.example.mpdamproject2021;
+package com.example.mpdamproject2021.Model;
 
 
 import com.google.gson.annotations.SerializedName;
@@ -10,23 +10,17 @@ public class Product {
     public String nameProduct;
     public String pictureProduct;
     public String priceProduct;
+    public String descriptionProduct;
     public BigInteger barcode;
-
     private String success;
 
-    public Product(int idProduct, String nameProduct, String pictureProduct, String priceProduct, BigInteger barcode) {
+    public Product(int idProduct, String nameProduct, String pictureProduct, String priceProduct, String descriptionProduct, BigInteger barcode, String success) {
         this.idProduct = idProduct;
         this.nameProduct = nameProduct;
         this.pictureProduct = pictureProduct;
         this.priceProduct = priceProduct;
+        this.descriptionProduct = descriptionProduct;
         this.barcode = barcode;
-    }
-
-    public String getSuccess() {
-        return success;
-    }
-
-    public void setSuccess(String success) {
         this.success = success;
     }
 
@@ -62,11 +56,27 @@ public class Product {
         this.priceProduct = priceProduct;
     }
 
+    public String getDescriptionProduct() {
+        return descriptionProduct;
+    }
+
+    public void setDescriptionProduct(String descriptionProduct) {
+        this.descriptionProduct = descriptionProduct;
+    }
+
     public BigInteger getBarcode() {
         return barcode;
     }
 
     public void setBarcode(BigInteger barcode) {
         this.barcode = barcode;
+    }
+
+    public String getSuccess() {
+        return success;
+    }
+
+    public void setSuccess(String success) {
+        this.success = success;
     }
 }

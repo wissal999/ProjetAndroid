@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="txt_name_categorie">20sp</dimen>
+    <dimen name="txt_btn">20sp</dimen>
+    <dimen name="txt_name_product">20sp</dimen>
+    <dimen name="txt_toolbar">20sp</dimen>
+    <dimen name="txt_edt">15sp</dimen>
+    <dimen name="txt_general">15sp</dimen>
+</resources>

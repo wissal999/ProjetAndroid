@@ -1,13 +1,14 @@
 package com.example.mpdamproject2021;
 
+import com.example.mpdamproject2021.Model.Product;
+import com.example.mpdamproject2021.Model.User;
+
 import java.util.List;
 
 import retrofit.Call;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
-import retrofit.http.GET;
 import retrofit.http.POST;
-import retrofit.http.Query;
 
 public interface ApiHandler {
 

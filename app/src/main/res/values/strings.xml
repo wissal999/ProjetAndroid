@@ -8,7 +8,6 @@
     <string name="MotDePasse">Mot de passe</string>
     <string name="ComfirmationMDP">Confirmation Mot de passe</string>
     <string name="NumTel">Numéro de téléphone</string>
-    <string name="Inscri">Inscription</string>
     <string name="telephone">téléphone</string>
     <string name="MdpOublié">Mot de passe oublié ?</string>
     <string name="pas_de_compte">Vous n\'avez pas de compte ?</string>
@@ -22,5 +21,15 @@
     <string name="tv_parfums_maquillages"><![CDATA[Parfums & Maquillages]]></string>
     <string name="tv_superette">Superette</string>
     <string name="tv_bebe"><![CDATA[Bébé & Jouets]]></string>
+    <string name="connexion">Connexion</string>
+    <string name="tv_scanner_produits">Scanner Produits</string>
+    <string name="tv_lancer_scan">Tappez pour lancer le scan</string>
+    <string name="tv_details_produits">Détails Produits</string>
+    <string name="tv_login">Login</string>
+    <string name="id">id</string>
+    <string name="nom_produit">nom de produit</string>
+    <string name="prix_produit">prix produit</string>
+    <string name="description">Description</string>
+    <string name="parametres">Paramètres</string>
 
 </resources>

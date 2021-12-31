@@ -9,8 +9,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.mpdamproject2021.Model.User;
 
 import retrofit.Call;
 import retrofit.Callback;
@@ -21,6 +24,7 @@ public class LoginActivity extends AppCompatActivity {
 TextView tv_incri;
 EditText edtUsernameLogin,edtPasswordLogin;
 ApiHandler apiHandler;
+ImageView imageBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,13 @@ ApiHandler apiHandler;
             public void onClick(View view) {
                 Intent intent=new Intent(getApplicationContext(), SignUpActivity.class);
                 startActivity(intent);
+            }
+        });
+        imageBack=findViewById(R.id.image_back);
+        imageBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
             }
         });
 

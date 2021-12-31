@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mpdamproject2021.Model.User;
+
 import retrofit.Call;
 import retrofit.Callback;
 import retrofit.Response;

@@ -22,13 +22,9 @@
         android:src="@drawable/ic_baseline_keyboard_backspace_24"
         />
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Scanner Produits"
-        android:layout_marginStart="10dp"
-        android:textColor="@color/white"
+        style="@style/style_tv_toolbar"
+        android:text="@string/tv_scanner_produits"
         android:layout_toEndOf="@+id/image_back"
-        android:textSize="20sp"
         android:layout_centerVertical="true"/>
 </RelativeLayout>
     <androidx.appcompat.widget.AppCompatImageView
@@ -47,7 +43,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:text="Tappez pour lancer le scan"
+        android:text="@string/tv_lancer_scan"
         app:layout_constraintTop_toBottomOf="@+id/img_scan"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

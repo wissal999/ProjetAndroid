@@ -4,7 +4,7 @@ import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 
 public class ApiClient {
-    public static final String URL="http://192.168.21.58:80/";
+    public static final String URL="http://192.168.43.114:80/";
     public static Retrofit retrofit= null ;
     public static Retrofit getApiClient(){
         if(retrofit==null){

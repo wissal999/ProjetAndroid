@@ -1,4 +1,4 @@
-package com.example.mpdamproject2021;
+package com.example.mpdamproject2021.Model;
 
 import com.google.gson.annotations.SerializedName;
 
